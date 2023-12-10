@@ -4,7 +4,7 @@ public class UserAccount {
     Integer accountId;
     Integer userId;
     String accountPassword;
-    Double accountBalance;
+
     String phoneNumber;
     String bankName;
 
@@ -32,13 +32,7 @@ public class UserAccount {
         this.accountPassword = accountPassword;
     }
 
-    public Double getAccountBalance() {
-        return accountBalance;
-    }
 
-    public void setAccountBalance(Double accountBalance) {
-        this.accountBalance = accountBalance;
-    }
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -62,7 +56,6 @@ public class UserAccount {
                 "accountId=" + accountId +
                 ", userId=" + userId +
                 ", accountPassword='" + accountPassword + '\'' +
-                ", accountBalance=" + accountBalance +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", bankName='" + bankName + '\'' +
                 '}';
