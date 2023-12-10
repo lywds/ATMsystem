@@ -9,17 +9,6 @@ public class Transaction {
     String transactionAmount;
     Timestamp timestamp;
 
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "transactionId=" + transactionId +
-                ", accountId=" + accountId +
-                ", transactionType='" + transactionType + '\'' +
-                ", transactionAmount='" + transactionAmount + '\'' +
-                ", timestamp=" + timestamp +
-                '}';
-    }
-
     public Integer getTransactionId() {
         return transactionId;
     }

@@ -15,4 +15,8 @@ public class TransactionServiceImpl implements TransactionService{
     public Transaction findByTransactionId(Integer id) {
         return transactionMapper.findByTransactionId(id);
     }
+    @Override
+    public void addTransaction(Transaction transaction) {
+        transactionMapper.insertTransaction(transaction);
+    }
 }

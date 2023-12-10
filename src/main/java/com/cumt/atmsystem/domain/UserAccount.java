@@ -1,10 +1,12 @@
 package com.cumt.atmsystem.domain;
 
+import java.math.BigDecimal;
+
 public class UserAccount {
     Integer accountId;
     Integer userId;
     String accountPassword;
-    Double accountBalance;
+    BigDecimal accountBalance;
     String phoneNumber;
     String bankName;
 
@@ -32,11 +34,11 @@ public class UserAccount {
         this.accountPassword = accountPassword;
     }
 
-    public Double getAccountBalance() {
+    public BigDecimal getAccountBalance() {
         return accountBalance;
     }
 
-    public void setAccountBalance(Double accountBalance) {
+    public void setAccountBalance(BigDecimal accountBalance) {
         this.accountBalance = accountBalance;
     }
 
