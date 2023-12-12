@@ -5,5 +5,5 @@ import org.apache.ibatis.cache.decorators.TransactionalCache;
 
 public interface TransactionService {
     public Transaction findByTransactionId(Integer id);
-    public void addTransaction(Transaction transaction);
+    public int insertTransaction(Transaction transaction);
 }

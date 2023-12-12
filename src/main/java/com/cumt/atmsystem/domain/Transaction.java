@@ -1,28 +1,46 @@
 package com.cumt.atmsystem.domain;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class Transaction {
-    Integer transactionId;
-    Integer accountId;
+    String transactionId;
+    String accountId;
     String transactionType;
-    String transactionAmount;
-    Timestamp timestamp;
+    BigDecimal transactionAmount;
+    Timestamp timeStamp;
+    String targetAccountId;
 
-    public Integer getTransactionId() {
+    public BigDecimal getTransactionAmount() {
+        return transactionAmount;
+    }
+
+    public String getTargetAccountId() {
+        return targetAccountId;
+    }
+
+    public void setTargetAccountId(String targetAccountId) {
+        this.targetAccountId = targetAccountId;
+    }
+
+    public String getTransactionId() {
         return transactionId;
     }
 
-    public void setTransactionId(Integer transactionId) {
+    public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
     }
 
-    public Integer getAccountId() {
+    public String getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(Integer accountId) {
+    public void setAccountId(String accountId) {
         this.accountId = accountId;
+    }
+
+    public void setTransactionAmount(BigDecimal transactionAmount) {
+        this.transactionAmount = transactionAmount;
     }
 
     public String getTransactionType() {
@@ -33,19 +51,11 @@ public class Transaction {
         this.transactionType = transactionType;
     }
 
-    public String getTransactionAmount() {
-        return transactionAmount;
+    public Timestamp getTimeStamp() {
+        return timeStamp;
     }
 
-    public void setTransactionAmount(String transactionAmount) {
-        this.transactionAmount = transactionAmount;
-    }
-
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
+    public void setTimeStamp(Timestamp timeStamp) {
+        this.timeStamp = timeStamp;
     }
 }

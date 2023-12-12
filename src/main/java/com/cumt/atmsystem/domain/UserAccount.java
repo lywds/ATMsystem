@@ -1,5 +1,6 @@
 package com.cumt.atmsystem.domain;
 
+import javax.persistence.Entity;
 import java.math.BigDecimal;
 
 public class UserAccount {

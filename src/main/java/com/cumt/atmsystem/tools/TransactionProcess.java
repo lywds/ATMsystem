@@ -1,24 +1,10 @@
-package com.cumt.atmsystem.service.impl;
+package com.cumt.atmsystem.tools;
 
 import com.cumt.atmsystem.domain.Transaction;
-import com.cumt.atmsystem.domain.UserAccount;
-import com.cumt.atmsystem.mapper.UserAccountMapper;
-import com.cumt.atmsystem.service.UserAccountRepository;
-import com.cumt.atmsystem.service.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
+public class TransactionProcess {
 
-@Service
-public class UserAccountServiceImpl implements UserAccountService{
-
-
-    @Autowired
-    private UserAccountMapper userAccountMapper;
-
-//    @Autowired
-//    private UserAccountRepository userAccountRepository;
 //    public boolean saveMoney(Transaction transaction) {
 //        String targetAccountId = transaction.getTargetAccountId();
 //        // 根据目标账户ID查询账户信息
@@ -35,10 +21,6 @@ public class UserAccountServiceImpl implements UserAccountService{
 //        account.setAccountBalance(newBalance);
 //        userAccountRepository.save(account);
 //        return true;
-//    }
 
-    @Override
-    public UserAccount findByUserAccountId(String id) {
-        return userAccountMapper.findByTransactionId(id);
     }
 }
