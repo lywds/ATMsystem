@@ -33,15 +33,16 @@ public class TransactionController {
     @PostMapping("/processTransaction")
     public ResponseEntity<String> processTransaction(@RequestBody Transaction transaction) {
         //转账操作两个id不相等
-        if(Objects.equals(transaction.getTransactionId(), transaction.getTargetAccountId())) {
+        if(Objects.equals(transaction.getAccountId(), transaction.getTargetAccountId())) {
             switch (transaction.getTransactionType()){
                 case "save":
-                    //return userAccountServiceImpl.saveMoney(transaction) ?  ResponseEntity.badRequest().body("Succeed to save money transaction") : ResponseEntity.badRequest().body("Failed to save money transaction");
+                    return userAccountServiceImpl.saveMoney(transaction) ?  ResponseEntity.badRequest().body("Succeed to save money transaction") : ResponseEntity.badRequest().body("Failed to save money transaction");
                 default:
                     return ResponseEntity.badRequest().body("Failed to find this transaction");
             }
         }
         else{
+            System.out.println(2);
             return ResponseEntity.badRequest().body("Failed to find this transaction");
         }
     }

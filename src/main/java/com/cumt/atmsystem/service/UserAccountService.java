@@ -6,4 +6,5 @@ import org.apache.catalina.User;
 
 public interface UserAccountService {
     public UserAccount findByUserAccountId(String id);
+    public boolean saveMoney(Transaction transaction);
 }

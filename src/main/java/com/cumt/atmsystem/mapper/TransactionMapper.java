@@ -9,6 +9,6 @@ import org.apache.ibatis.annotations.Select;
 public interface TransactionMapper {
     @Select("select * from transaction where account_id = #{id}")
     public Transaction findByTransactionId(Integer id);
-    @Insert("INSERT INTO transaction (account_id, transaction_type, transaction_amount, time_stamp) VALUES (#{accountId}, #{transactionType}, #{transactionAmount}, #{timeStamp})")
+    @Insert("INSERT INTO transaction (account_id, transaction_type, transaction_amount, time_stamp,target_account_id) VALUES (#{accountId}, #{transactionType}, #{transactionAmount}, #{timeStamp},#{targetAccountId})")
     public int insertTransaction(Transaction transaction);
 }

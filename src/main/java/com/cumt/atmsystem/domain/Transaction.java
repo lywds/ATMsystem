@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class Transaction {
-    String transactionId;
+    Integer transactionId;
     String accountId;
     String transactionType;
     BigDecimal transactionAmount;
@@ -23,11 +23,11 @@ public class Transaction {
         this.targetAccountId = targetAccountId;
     }
 
-    public String getTransactionId() {
+    public Integer getTransactionId() {
         return transactionId;
     }
 
-    public void setTransactionId(String transactionId) {
+    public void setTransactionId(Integer transactionId) {
         this.transactionId = transactionId;
     }
 
