@@ -4,27 +4,27 @@ import javax.persistence.Entity;
 import java.math.BigDecimal;
 
 public class UserAccount {
-    Integer accountId;
-    Integer userId;
+    String accountId;
+    String userId;
     String accountPassword;
     BigDecimal accountBalance;
     String phoneNumber;
     String bankName;
 
-    public Integer getAccountId() {
+    public String getAccountId() {
         return accountId;
     }
 
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
-    }
-
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
     public String getAccountPassword() {

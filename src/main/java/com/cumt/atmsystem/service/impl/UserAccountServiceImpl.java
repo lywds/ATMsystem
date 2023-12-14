@@ -2,9 +2,12 @@ package com.cumt.atmsystem.service.impl;
 
 import com.cumt.atmsystem.domain.Transaction;
 import com.cumt.atmsystem.domain.UserAccount;
+import com.cumt.atmsystem.domain.UserInfo;
 import com.cumt.atmsystem.mapper.TransactionMapper;
 import com.cumt.atmsystem.mapper.UserAccountMapper;
+import com.cumt.atmsystem.mapper.UserInfoMapper;
 import com.cumt.atmsystem.service.UserAccountService;
+import com.cumt.atmsystem.tools.GenerateAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,8 @@ public class UserAccountServiceImpl implements UserAccountService{
     private UserAccountMapper userAccountMapper;
     @Autowired
     private TransactionMapper transactionMapper;
+    @Autowired
+    private UserInfoMapper userInfoMapper;
     @Override
     public boolean saveMoney(Transaction transaction) {
         return changeMoney(transaction);
@@ -27,6 +32,23 @@ public class UserAccountServiceImpl implements UserAccountService{
     public boolean withdrawMoney(Transaction transaction) {
         transaction.setTransactionAmount(transaction.getTransactionAmount().multiply(new BigDecimal(-1)));
         return changeMoney(transaction);
+    }
+    @Override
+    public int insertUserAccount(UserAccount userAccount) {
+        return userAccountMapper.insertUserAccount(userAccount);
+    }
+
+    @Override
+    public boolean createAccount(UserAccount userAccount, UserInfo userInfo) {
+        String newAccount = GenerateAccount.generateBankCardNumber();
+        while(userAccountMapper.findByUserAccountId(newAccount)!=null){
+            newAccount = GenerateAccount.generateBankCardNumber();
+        }
+        userAccount.setAccountId(newAccount);
+        userAccountMapper.insertUserAccount(userAccount);
+        if(userInfoMapper.findByUserId(userInfo.getUserId())==null)
+            userInfoMapper.insertUserInfo(userInfo);
+        return true;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.cumt.atmsystem.domain;
 
 public class UserInfo {
-    Integer userId;
+    String userId;
     String userName;
     String userAddress;
     String userEmail;
@@ -18,11 +18,11 @@ public class UserInfo {
                 '}';
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
