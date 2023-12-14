@@ -11,6 +11,8 @@ public class Transaction {
     Timestamp timeStamp;
     String targetAccountId;
 
+    //deep copy
+
     public BigDecimal getTransactionAmount() {
         return transactionAmount;
     }

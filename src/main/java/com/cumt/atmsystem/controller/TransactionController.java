@@ -37,13 +37,19 @@ public class TransactionController {
             switch (transaction.getTransactionType()){
                 case "save":
                     return userAccountServiceImpl.saveMoney(transaction) ?  ResponseEntity.badRequest().body("Succeed to save money transaction") : ResponseEntity.badRequest().body("Failed to save money transaction");
+                case "withdraw":
+                    return userAccountServiceImpl.withdrawMoney(transaction) ?  ResponseEntity.badRequest().body("Succeed to withdraw money transaction") : ResponseEntity.badRequest().body("Failed to withdraw money transaction");
                 default:
                     return ResponseEntity.badRequest().body("Failed to find this transaction");
             }
         }
         else{
-            System.out.println(2);
-            return ResponseEntity.badRequest().body("Failed to find this transaction");
+            switch (transaction.getTransactionType()){
+                case "transfer":
+                    return userAccountServiceImpl.transferMoney(transaction) ?  ResponseEntity.badRequest().body("Succeed to transfer money transaction") : ResponseEntity.badRequest().body("Failed to transfer money transaction");
+                default:
+                    return ResponseEntity.badRequest().body("Failed to find this transaction");
+            }
         }
     }
 }
