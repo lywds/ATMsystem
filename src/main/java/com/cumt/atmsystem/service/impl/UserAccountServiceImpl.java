@@ -39,7 +39,7 @@ public class UserAccountServiceImpl implements UserAccountService{
     }
 
     @Override
-    public boolean createAccount(UserAccount userAccount, UserInfo userInfo) {
+    public String createAccount(UserAccount userAccount, UserInfo userInfo) {
         String newAccount = GenerateAccount.generateBankCardNumber();
         while(userAccountMapper.findByUserAccountId(newAccount)!=null){
             newAccount = GenerateAccount.generateBankCardNumber();
@@ -48,7 +48,7 @@ public class UserAccountServiceImpl implements UserAccountService{
         userAccountMapper.insertUserAccount(userAccount);
         if(userInfoMapper.findByUserId(userInfo.getUserId())==null)
             userInfoMapper.insertUserInfo(userInfo);
-        return true;
+        return newAccount;
     }
 
     @Override

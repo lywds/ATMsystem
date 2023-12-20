@@ -25,9 +25,9 @@ public class UserAccountController {
     public ResponseEntity<String> createAccount(@RequestBody Map<String, Object> data) {
         UserAccount userAccount = objectMapper.convertValue(data.get("userAccount"), UserAccount.class);
         UserInfo userInfo = objectMapper.convertValue(data.get("userInfo"), UserInfo.class);
-
-        if (userAccountService.createAccount(userAccount, userInfo)) {
-            return ResponseEntity.ok("Created account successfully");
+        String newAccount=userAccountService.createAccount(userAccount, userInfo);
+        if (true) {
+            return ResponseEntity.ok(newAccount);
         } else {
             return ResponseEntity.badRequest().body("Failed to create account");
         }

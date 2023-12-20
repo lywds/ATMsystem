@@ -13,5 +13,5 @@ public interface UserAccountService {
     public boolean transferMoney(Transaction transaction);
     public int insertUserAccount(UserAccount userAccount);
 
-    public boolean createAccount(UserAccount userAccount, UserInfo userInfo);
+    public String createAccount(UserAccount userAccount, UserInfo userInfo);
 }
