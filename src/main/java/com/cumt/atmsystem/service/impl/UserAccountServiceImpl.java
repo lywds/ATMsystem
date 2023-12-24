@@ -60,21 +60,59 @@ public class UserAccountServiceImpl implements UserAccountService{
         return changeMoney(transaction);
     }
 
+    @Override
+    public boolean exchangeMoney(Transaction transaction) {
+        return changeMoney(transaction);
+    }
+
     public boolean changeMoney(Transaction transaction) {
         String targetAccountId = transaction.getTargetAccountId();
         // 根据目标账户ID查询账户信息
         UserAccount account =  userAccountMapper.findByUserAccountId(targetAccountId);
 
-        // 获取原始余额
-        BigDecimal originalBalance = account.getAccountBalance();
+        // 获取交易额
+        BigDecimal amount = transaction.getTransactionAmount();
         // 计算新的余额
-        BigDecimal newBalance = originalBalance.add(transaction.getTransactionAmount());
-        if (account == null||newBalance.compareTo(BigDecimal.ZERO)<0) {
-            return false;
-        }
+        BigDecimal newBalance;
+//        = originalBalance.add(transaction.getTransactionAmount());
+//        if (account == null||newBalance.compareTo(BigDecimal.ZERO)<0) {
+//            return false;
+//        }
         System.out.println(1);
         // 更新账户余额
-        userAccountMapper.updateBalanceById(newBalance,targetAccountId);
+//        userAccountMapper.updateBalanceById(newBalance,targetAccountId);
+        switch (transaction.getCurrencyType()) {
+            case "USD":
+                newBalance = account.getUsdBalance().add(amount);
+                if (newBalance.compareTo(BigDecimal.ZERO) < 0) return false;
+                account.setUsdBalance(newBalance);
+                userAccountMapper.updateUsdBalanceById(newBalance,targetAccountId);
+                break;
+            case "EUR":
+                newBalance = account.getEurBalance().add(amount);
+                if (newBalance.compareTo(BigDecimal.ZERO) < 0) return false;
+                account.setEurBalance(newBalance);
+                userAccountMapper.updateEurBalanceById(newBalance,targetAccountId);
+                break;
+            case "GBP":
+                newBalance = account.getGbpBalance().add(amount);
+                if (newBalance.compareTo(BigDecimal.ZERO) < 0) return false;
+                account.setGbpBalance(newBalance);
+                userAccountMapper.updateGbpBalanceById(newBalance,targetAccountId);
+                break;
+            case "HKD":
+                newBalance = account.getHkdBalance().add(amount);
+                if (newBalance.compareTo(BigDecimal.ZERO) < 0) return false;
+                account.setHkdBalance(newBalance);
+                userAccountMapper.updateHkdBalanceById(newBalance,targetAccountId);
+                break;
+            default:
+                newBalance = account.getAccountBalance().add(amount);
+                if (newBalance.compareTo(BigDecimal.ZERO) < 0) return false;
+                account.setAccountBalance(newBalance);
+                userAccountMapper.updateBalanceById(newBalance,targetAccountId);
+                break;
+        }
         long currentTimeMillis = System.currentTimeMillis();
         //设置交易完成时间
         Timestamp timestamp = new Timestamp(currentTimeMillis);

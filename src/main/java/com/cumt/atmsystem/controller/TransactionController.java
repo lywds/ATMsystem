@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -19,8 +20,12 @@ public class TransactionController {
     @Autowired
     private UserAccountServiceImpl userAccountServiceImpl;
     @RequestMapping("/findByTransactionId")
-    public Transaction findByTransactionId(Integer id){
+    public Transaction findByTransactionId(String id){
         return transactionService.findByTransactionId(id);
+    }
+    @RequestMapping("/findByAccountId")
+    public List<Transaction> findByAccountId(String id){
+        return transactionService.findByAccountId(id);
     }
     @PostMapping("/addTransaction")
     public ResponseEntity<String> insertTransaction(@RequestBody Transaction transaction) {
@@ -37,18 +42,22 @@ public class TransactionController {
         if(Objects.equals(transaction.getAccountId(), transaction.getTargetAccountId())) {
             switch (transaction.getTransactionType()){
                 case "save":
-                    return userAccountServiceImpl.saveMoney(transaction) ?  ResponseEntity.badRequest().body("Succeed to save money transaction") : ResponseEntity.badRequest().body("Failed to save money transaction");
+                    return userAccountServiceImpl.saveMoney(transaction) ?  ResponseEntity.ok("Succeed to save money transaction") : ResponseEntity.badRequest().body("Failed to save money transaction");
                 case "withdraw":
-                    return userAccountServiceImpl.withdrawMoney(transaction) ?  ResponseEntity.badRequest().body("Succeed to withdraw money transaction") : ResponseEntity.badRequest().body("Failed to withdraw money transaction");
-                default:
+                    return userAccountServiceImpl.withdrawMoney(transaction) ?  ResponseEntity.ok("Succeed to withdraw money transaction") : ResponseEntity.badRequest().body("Failed to withdraw money transaction");
+                case "currency":
+                    return userAccountServiceImpl.exchangeMoney(transaction) ?  ResponseEntity.ok("Succeed to exchange money transaction") : ResponseEntity.badRequest().body("Failed to exchange money transaction");
+                default:{
                     return ResponseEntity.badRequest().body("Failed to find this transaction");
+                }
             }
         }
         else{
             switch (transaction.getTransactionType()){
                 case "transfer":
-                    return userAccountServiceImpl.transferMoney(transaction) ?  ResponseEntity.badRequest().body("Succeed to transfer money transaction") : ResponseEntity.badRequest().body("Failed to transfer money transaction");
+                    return userAccountServiceImpl.transferMoney(transaction) ?  ResponseEntity.ok("Succeed to transfer money transaction") : ResponseEntity.badRequest().body("Failed to transfer money transaction");
                 default:
+                    System.out.println("1");
                     return ResponseEntity.badRequest().body("Failed to find this transaction");
             }
         }

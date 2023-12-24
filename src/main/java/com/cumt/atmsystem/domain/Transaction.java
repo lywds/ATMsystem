@@ -10,8 +10,15 @@ public class Transaction {
     BigDecimal transactionAmount;
     Timestamp timeStamp;
     String targetAccountId;
+    String currencyType;
 
-    //deep copy
+    public String getCurrencyType() {
+        return currencyType;
+    }
+
+    public void setCurrencyType(String currencyType) {
+        this.currencyType = currencyType;
+    }
 
     public BigDecimal getTransactionAmount() {
         return transactionAmount;

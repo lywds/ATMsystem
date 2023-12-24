@@ -8,6 +8,43 @@ public class UserAccount {
     String userId;
     String accountPassword;
     BigDecimal accountBalance;
+    BigDecimal usdBalance;
+    BigDecimal eurBalance;
+    BigDecimal gbpBalance;
+    BigDecimal hkdBalance;
+
+    public BigDecimal getUsdBalance() {
+        return usdBalance;
+    }
+
+    public void setUsdBalance(BigDecimal usdBalance) {
+        this.usdBalance = usdBalance;
+    }
+
+    public BigDecimal getEurBalance() {
+        return eurBalance;
+    }
+
+    public void setEurBalance(BigDecimal eurBalance) {
+        this.eurBalance = eurBalance;
+    }
+
+    public BigDecimal getGbpBalance() {
+        return gbpBalance;
+    }
+
+    public void setGbpBalance(BigDecimal gbpBalance) {
+        this.gbpBalance = gbpBalance;
+    }
+
+    public BigDecimal getHkdBalance() {
+        return hkdBalance;
+    }
+
+    public void setHkdBalance(BigDecimal hkdBalance) {
+        this.hkdBalance = hkdBalance;
+    }
+
     String phoneNumber;
     String bankName;
 
