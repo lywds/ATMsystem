@@ -12,6 +12,7 @@ public class Transaction {
     String targetAccountId;
     String currencyType;
 
+    Integer billId;
     public String getCurrencyType() {
         return currencyType;
     }
@@ -26,6 +27,14 @@ public class Transaction {
 
     public String getTargetAccountId() {
         return targetAccountId;
+    }
+
+    public Integer getBillId() {
+        return billId;
+    }
+
+    public void setBillId(Integer billId) {
+        this.billId = billId;
     }
 
     public void setTargetAccountId(String targetAccountId) {

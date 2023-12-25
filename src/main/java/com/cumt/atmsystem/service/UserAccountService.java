@@ -13,6 +13,8 @@ public interface UserAccountService {
 
     public boolean transferMoney(Transaction transaction);
     public boolean exchangeMoney(Transaction transaction);
+
+    public boolean payBill(Transaction transaction);
     public int insertUserAccount(UserAccount userAccount);
 
     public String createAccount(UserAccount userAccount, UserInfo userInfo);

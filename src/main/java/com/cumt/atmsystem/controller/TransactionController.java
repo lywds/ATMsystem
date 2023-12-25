@@ -41,12 +41,14 @@ public class TransactionController {
         //转账操作两个id不相等
         if(Objects.equals(transaction.getAccountId(), transaction.getTargetAccountId())) {
             switch (transaction.getTransactionType()){
+                case "saveCurrency":
                 case "save":
                     return userAccountServiceImpl.saveMoney(transaction) ?  ResponseEntity.ok("Succeed to save money transaction") : ResponseEntity.badRequest().body("Failed to save money transaction");
+                case "withdrawCurrency":
                 case "withdraw":
+                case "payBill":
                     return userAccountServiceImpl.withdrawMoney(transaction) ?  ResponseEntity.ok("Succeed to withdraw money transaction") : ResponseEntity.badRequest().body("Failed to withdraw money transaction");
-                case "currency":
-                    return userAccountServiceImpl.exchangeMoney(transaction) ?  ResponseEntity.ok("Succeed to exchange money transaction") : ResponseEntity.badRequest().body("Failed to exchange money transaction");
+                    //return userAccountServiceImpl.payBill(transaction) ?  ResponseEntity.ok("Succeed to pay transaction") : ResponseEntity.badRequest().body("Failed to pay bill transaction");
                 default:{
                     return ResponseEntity.badRequest().body("Failed to find this transaction");
                 }
@@ -57,7 +59,6 @@ public class TransactionController {
                 case "transfer":
                     return userAccountServiceImpl.transferMoney(transaction) ?  ResponseEntity.ok("Succeed to transfer money transaction") : ResponseEntity.badRequest().body("Failed to transfer money transaction");
                 default:
-                    System.out.println("1");
                     return ResponseEntity.badRequest().body("Failed to find this transaction");
             }
         }

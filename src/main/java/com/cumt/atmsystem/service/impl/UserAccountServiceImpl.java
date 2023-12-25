@@ -3,6 +3,7 @@ package com.cumt.atmsystem.service.impl;
 import com.cumt.atmsystem.domain.Transaction;
 import com.cumt.atmsystem.domain.UserAccount;
 import com.cumt.atmsystem.domain.UserInfo;
+import com.cumt.atmsystem.mapper.BillRecordMapper;
 import com.cumt.atmsystem.mapper.TransactionMapper;
 import com.cumt.atmsystem.mapper.UserAccountMapper;
 import com.cumt.atmsystem.mapper.UserInfoMapper;
@@ -24,6 +25,8 @@ public class UserAccountServiceImpl implements UserAccountService{
     private TransactionMapper transactionMapper;
     @Autowired
     private UserInfoMapper userInfoMapper;
+    @Autowired
+    private BillRecordMapper billRecordMapper;
     @Override
     public boolean saveMoney(Transaction transaction) {
         return changeMoney(transaction);
@@ -65,6 +68,13 @@ public class UserAccountServiceImpl implements UserAccountService{
         return changeMoney(transaction);
     }
 
+    @Override
+    public boolean payBill(Transaction transaction) {
+        billRecordMapper.updateBalanceById(transaction.getBillId());
+        transaction.setTransactionAmount(transaction.getTransactionAmount().multiply(new BigDecimal(-1)));
+        return changeMoney(transaction);
+    }
+
     public boolean changeMoney(Transaction transaction) {
         String targetAccountId = transaction.getTargetAccountId();
         // 根据目标账户ID查询账户信息
@@ -78,7 +88,7 @@ public class UserAccountServiceImpl implements UserAccountService{
 //        if (account == null||newBalance.compareTo(BigDecimal.ZERO)<0) {
 //            return false;
 //        }
-        System.out.println(1);
+       // System.out.println(1);
         // 更新账户余额
 //        userAccountMapper.updateBalanceById(newBalance,targetAccountId);
         switch (transaction.getCurrencyType()) {
@@ -111,6 +121,7 @@ public class UserAccountServiceImpl implements UserAccountService{
                 if (newBalance.compareTo(BigDecimal.ZERO) < 0) return false;
                 account.setAccountBalance(newBalance);
                 userAccountMapper.updateBalanceById(newBalance,targetAccountId);
+                billRecordMapper.updateBalanceById(transaction.getBillId());
                 break;
         }
         long currentTimeMillis = System.currentTimeMillis();
